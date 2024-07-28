@@ -1,0 +1,68 @@
+# Función para obtener un input del usuario que no puede estar vacío
+def obtener_input_no_vacio(mensaje):
+    valor = input(mensaje).strip()  # Solicita al usuario un valor y elimina los espacios en blanco alrededor
+    while not valor:  # Bucle para verificar que el valor no esté vacío
+        print("Este campo no puede quedar vacío. Por favor, intente de nuevo.")
+        valor = input(mensaje).strip()  # Solicita nuevamente el valor si estaba vacío
+    return valor  # Devuelve el valor ingresado por el usuario
+
+# Función para obtener un input numérico del usuario
+def obtener_input_numerico(mensaje):
+    while True:  # Bucle para asegurar que el input sea un número válido
+        valor = input(mensaje).strip()  # Solicita al usuario un valor y elimina los espacios en blanco alrededor
+        if valor.isdigit():  # Verifica si el valor es un número entero
+            return int(valor)  # Devuelve el valor como un entero
+        else:
+            try:
+                return float(valor)  # Intenta convertir el valor a un número decimal
+            except ValueError:
+                print("Por favor, ingrese un número válido.")  # Muestra un mensaje de error si el valor no es un número válido
+
+# Función para calcular el Índice de Masa Corporal (IMC)
+def calcular_imc(peso, estatura):
+    return peso / (estatura ** 2)  # Calcula el IMC usando la fórmula IMC = peso / estatura^2
+
+# Función para interpretar el resultado del IMC
+def interpretar_imc(imc):
+    if imc < 18.5:
+        return "Bajo peso"
+    elif 18.5 <= imc < 24.9:
+        return "Normal"
+    elif 25.0 <= imc < 29.9:
+        return "Sobrepeso"
+    else:
+        return "Obesidad"
+
+# Función principal del programa
+def main():
+    print("Ingrese los siguientes datos:")
+
+    # Solicita los datos personales del usuario y se asegura de que no estén vacíos
+    nombre = obtener_input_no_vacio("Nombre: ")
+    apellido_paterno = obtener_input_no_vacio("Apellido paterno: ")
+    apellido_materno = obtener_input_no_vacio("Apellido materno: ")
+    
+    # Solicita la edad, el peso y la estatura del usuario y se asegura de que sean números válidos
+    edad = obtener_input_numerico("Edad: ")
+    peso = obtener_input_numerico("Peso (kg): ")
+    estatura = obtener_input_numerico("Estatura (m): ")
+
+    # Calcula el IMC del usuario
+    imc = calcular_imc(peso, estatura)
+
+    # Interpreta el resultado del IMC
+    interpretacion_imc = interpretar_imc(imc)
+
+    # Despliega la información ingresada y el IMC calculado junto con su interpretación
+    print("\nInformación ingresada:")
+    print(f"Nombre completo: {nombre} {apellido_paterno} {apellido_materno}")
+    print(f"Edad: {edad} años")
+    print(f"Peso: {peso} kg")
+    print(f"Estatura: {estatura} m")
+    print(f"Índice de Masa Corporal (IMC): {imc:.2f}")  # Muestra el IMC con dos decimales
+    print(f"Interpretación del IMC: {interpretacion_imc}")  # Muestra la interpretación del IMC
+
+# Verifica si este archivo se está ejecutando como el programa principal
+if __name__ == "__main__":
+    main()  # Llama a la función principal
+#Practica 1
